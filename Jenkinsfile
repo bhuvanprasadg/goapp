@@ -13,7 +13,6 @@ node{
             sh 'go build main.go'
         }
         stage('test'){
-            sh 'go mod init example.com/m/v2'
             sh 'go test'
         }
     }
