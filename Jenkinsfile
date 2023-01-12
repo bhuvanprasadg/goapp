@@ -17,7 +17,20 @@ node{
             sh 'go build main.go'
         }
     }
-    stage('Run'){
-        sh 'nohup ./main &'
+    stage('Upload build artifacts'){
+        def server = Artifactory.server 'jfrog-server'
+        def buildNumber = currentBuild.number
+        def uploadSpec = """{
+          "files": [
+            {
+                "pattern": "${JENKINS_WORKSPACE}/${env.JOB_NAME}/*.mod",
+                "pattern": "${JENKINS_WORKSPACE}/${env.JOB_NAME}/*.zip",
+                "target": "${env.JOB_NAME}/${buildNumber}/"
+            }
+         ]
+        }"""
+        def buildInfo = server.upload spec:uploadSpec
+        server.publishBuildInfo buildInfo
     }
+    
 }
