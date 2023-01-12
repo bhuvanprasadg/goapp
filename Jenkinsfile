@@ -12,6 +12,9 @@ node{
         stage('build'){
             sh 'go build main.go'
         }
+        stage('test'){
+            sh 'go test'
+        }
     }
     stage('Restart service'){
         sh 'service goweb restart'
