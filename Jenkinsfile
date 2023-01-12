@@ -46,8 +46,11 @@ node{
             }"""
         server.download spec: downloadSpec
     }
+    //create a Virtual Machine & host this on a VM.
+    //create a service file to start the application whenever the VM starts.
+    //create nginx config file to port-forward
     stage('Deploy/Run'){
         sh 'unzip main.zip'
-        sh './main'
+        sh 'nohup ./main'
     }
 }
