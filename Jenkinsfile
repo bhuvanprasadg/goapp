@@ -16,6 +16,9 @@ node{
         stage('build'){
             sh 'go build main.go'
         }
+        stage('package'){
+            sh 'zip main.zip main'
+        }
     }
     stage('Upload build artifacts'){
         def server = Artifactory.server 'jfrog-server'
