@@ -17,6 +17,6 @@ node{
         }
     }
     stage('Run'){
-        sh './main'
+        sh 'nohup ./main &'
     }
 }
