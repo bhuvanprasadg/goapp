@@ -51,6 +51,6 @@ node{
     //create nginx config file to port-forward
     stage('Deploy/Run'){
         sh 'unzip main.zip'
-        sh 'nohup ./main'
+        sh 'server goweb restart'
     }
 }
