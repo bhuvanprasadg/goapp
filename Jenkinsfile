@@ -35,5 +35,15 @@ node{
         def buildInfo = server.upload spec:uploadSpec
         server.publishBuildInfo buildInfo
     }
-    
+    stage('Download artifacts from JFrog'){
+        def downloadSpec = """{
+         "files": [
+            {
+               "pattern": "${JENKINS_WORKSPACE}/${env.JOB_NAME}/*.zip",
+               "target": "${env.JOB_NAME}/${buildNumber}/"
+            }
+         ]
+        }"""
+        server.download spec: downloadSpec
+    }
 }
