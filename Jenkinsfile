@@ -9,11 +9,11 @@ node{
         stage('Dependencies version'){
             sh 'go version'
         }
-        stage('build'){
-            sh 'go build main.go'
-        }
         stage('test'){
             sh 'go test'
+        }
+        stage('build'){
+            sh 'go build main.go'
         }
     }
     stage('Restart service'){
