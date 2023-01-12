@@ -16,7 +16,7 @@ node{
             sh 'go build main.go'
         }
     }
-    stage('Restart service'){
-        sh 'service goweb restart'
+    stage('Run'){
+        sh './main'
     }
 }
