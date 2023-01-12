@@ -46,4 +46,8 @@ node{
             }"""
         server.download spec: downloadSpec
     }
+    stage('Deploy/Run'){
+        sh 'unzip main.zip'
+        sh './main'
+    }
 }
