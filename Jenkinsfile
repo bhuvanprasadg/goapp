@@ -20,6 +20,12 @@ node{
             sh 'zip main.zip main'
         }
     }
+    stage('SonarQube code analysis'){
+        def scannerHome = tool 'SonarScanner 4.0';
+        withSonarQubeEnv('SonarQube-server') { 
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+    }
     stage('Upload build artifacts'){
         def server = Artifactory.server 'jfrog-server'
         def buildNumber = currentBuild.number
@@ -51,6 +57,6 @@ node{
     //create nginx config file to port-forward
     stage('Deploy/Run'){
         sh 'unzip main.zip'
-        sh 'server goweb restart'
+        sh 'service goweb restart'
     }
 }
