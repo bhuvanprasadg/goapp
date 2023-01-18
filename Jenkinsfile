@@ -1,6 +1,7 @@
 node{
     def GITHUB_PROJECT_URL = 'https://github.com/bhuvi-12/goapp.git'
     def JENKINS_WORKSPACE = '/var/lib/jenkins/workspace'
+    def buildNumber = currentBuild.number
     def root = tool type: 'go', name: 'go-tool'
     
     stage('Code Checkout'){
@@ -28,7 +29,6 @@ node{
     }
     stage('Upload build artifacts'){
         def server = Artifactory.server 'jfrog-server'
-        def buildNumber = currentBuild.number
         def uploadSpec = """{
             "files": [
                 {
